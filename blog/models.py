@@ -8,7 +8,7 @@ class Post(models.Model):
     Attributes:
         title (str): The post title
         slug (str): The post slug.
-        author (str): The post author.
+        author (int): The post author.
         body (str): The body of the post.
         publish (str): The post publish date and time
         created (str): The post created date and time
