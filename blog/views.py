@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.http import Http404
 
@@ -11,12 +11,15 @@ def post_list(request):
                  {'posts': posts})
 
 
-def post_detail(request, id):
+def post_detail(request, year, month, day, post):
     """Display single post or 404 error if post is not found."""
 
     post = get_object_or_404(Post,
-                             id=id,
-                             status=Post.Status.PUBLISHED)
+                             status=Post.Status.PUBLISHED,
+                             slug=post,
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day)
     
     return render(request,
                   'blog/post/detail.html',
